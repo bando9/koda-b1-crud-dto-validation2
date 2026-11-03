@@ -1,4 +1,3 @@
-using Backend.Api.Data;
 using Backend.Api.DTOs;
 using Backend.Api.Interfaces;
 using Backend.Api.Models;
@@ -13,7 +12,6 @@ namespace Backend.Api.Controllers;
 public sealed class ProductController : ControllerBase
 {
     private readonly IProductService _service;
-    // private readonly InMemoryProductCatalog _catalog;
 
     public ProductController(IProductService service)
     {
@@ -89,7 +87,7 @@ public sealed class ProductController : ControllerBase
     }
     
 
-    [HttpPut]
+    [HttpPut("{productCode}")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status404NotFound)]
     [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status400BadRequest)]

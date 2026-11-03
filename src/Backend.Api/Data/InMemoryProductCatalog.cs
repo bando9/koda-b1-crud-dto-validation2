@@ -25,16 +25,6 @@ public sealed class InMemoryProductCatalog
         }
     }
 
-    // public void Add(Product product)
-    // {
-    //     if (_product.Any(p => p.ProductCode == product.ProductCode))
-    //     {
-    //         throw new ArgumentException("product code already exists.");
-    //     }
-
-    //     _product.Add(product);
-    // }
-
     public bool TryAddPoduct(Product product)
     {
         lock (_sync)
@@ -51,16 +41,6 @@ public sealed class InMemoryProductCatalog
         }
     }
 
-    // public void Remove(string productCode)
-    // {
-    //     var product = GetByCode(productCode);
-
-    //     if(product != null)
-    //     {   
-    //     _product.Remove(product);
-    //     }
-    // }
-
     public bool TryRemoveProduct(string productCode)
     {
         lock (_sync)
@@ -75,17 +55,6 @@ public sealed class InMemoryProductCatalog
         }
     }
 
-    // public void Put(string productCode, Product updateProduct)
-    // {
-    //     var product = GetByCode(productCode) ?? throw new ArgumentException("product is not found");
-
-    //     product.ProductCode = updateProduct.ProductCode;
-    //     product.Name = updateProduct.Name;
-    //     product.Price = updateProduct.Price;
-    //     product.Stock = updateProduct.Stock;        
-    //     product.Category = updateProduct.Category;        
-
-    // }
     public bool TryUpdateProduct(Product product)
     {
         lock (_sync)

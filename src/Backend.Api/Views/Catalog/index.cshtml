@@ -1,11 +1,11 @@
-@using System.Globalization;
+@using System.Globalization
 
 @model IReadOnlyList<Backend.Api.DTOs.ProductResponse>
 
 @{
     Layout= null;
     ViewData["Title"] = "Catalog Page";
-    var rupiah = CultureInfo.GetCultureInfo("id-ID");
+    var formatToRupiah = CultureInfo.GetCultureInfo("id-ID");
 }
 
 <!DOCTYPE html>
@@ -14,15 +14,57 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewData["Title"]</title>
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body>
-    <table border="1">
+
+<div class="max-w-4xl mx-auto p-6">
+    <div class="flex justify-between items-center mb-6">
+        <h2 class="text-2xl font-bold text-gray-800">Katalog Produk</h2>
+        <a asp-action="Create" class="cursor-pointer bg-blue-600 hover:bg-blue-700 text-white font-medium px-4 py-2 rounded-lg transition">
+            + Tambah Produk
+        </a>
+    </div>
+
+    <div class="overflow-x-auto bg-white rounded-lg shadow">
+        <table class="w-full text-left border-collapse">
+            <thead>
+                <tr class="bg-gray-100 border-b text-gray-600 text-sm">
+                    <th class="p-3">ID</th>
+                    <th class="p-3">Nama Produk</th>
+                    <th class="p-3">Harga</th>
+                    <th class="p-3 text-center">Aksi</th>
+                </tr>
+            </thead>
+            <tbody class="divide-y divide-gray-200 text-sm">
+                @foreach (var product in Model)
+                {
+                    <tr class="hover:bg-gray-50">
+                        <td class="p-3 font-mono">@product.ProductCode</td>
+                        <td class="p-3 font-medium text-gray-900">@product.Name</td>
+                        <td class="p-3 text-emerald-600 font-semibold">@product.Price.ToString("C0",formatToRupiah)</td>
+                        <td class="p-3 text-center space-x-2">
+                            <a asp-action="Edit" asp-route-id="@product.ProductCode" class="text-amber-600 hover:underline cursor-pointer">Edit</a>
+                            
+                            <form asp-action="Delete" asp-route-id="@product.ProductCode" method="post" class="inline " onsubmit="return confirm('Hapus produk?');">
+                                <button type="submit" class="text-red-600 hover:underline cursor-pointer">Hapus</button>
+                            </form>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+    @* <table border="1">
         <tr>
             <th>Product Code</th>
             <th>Product</th>
             <th>Category</th>
             <th>Price</th>
             <th>Stock</th>
+            <th>Action</th>
         </tr>
 
         <tbody>
@@ -40,12 +82,13 @@
                             <th>@product.ProductCode</th>
                             <th>@product.Name</th>
                             <th>@product.Category</th>
-                            <th>@product.Price.ToString("C0",rupiah)</th>
+                            <th>@product.Price.ToString("C0",formatToRupiah)</th>
                             <th>@product.Stock</th>
+                            <th><button>Delete</button></th>
                         </tr>
                     }
                 }
             </tbody>
-    </table>
+    </table> *@
 </body>
 </html>

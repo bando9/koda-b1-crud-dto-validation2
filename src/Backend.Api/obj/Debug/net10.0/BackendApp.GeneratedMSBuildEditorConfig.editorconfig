@@ -26,3 +26,7 @@ build_property.EnableCodeStyleSeverity =
 [E:/code/koda-projects/day16-backend/koda-b1-backend/src/Backend.Api/Views/Catalog/index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2F0YWxvZ1xpbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
+
+[E:/code/koda-projects/day16-backend/koda-b1-backend/src/Backend.Api/Views/Home/index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxpbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 

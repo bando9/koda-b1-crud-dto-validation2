@@ -18,4 +18,5 @@ public sealed class CatalogController : Controller
         var products = _service.GetAll();
         return View(products);
     }
+
 }
