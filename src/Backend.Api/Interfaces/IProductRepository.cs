@@ -4,9 +4,9 @@ namespace Backend.Api.Interfaces;
 
 public interface IProductRepository
 {
-    IReadOnlyList<Product> GetAll();
-    Product? GetByCode(string productCode);
-    bool TryAdd(Product product);
-    bool TryUpdate(Product product);
-    bool TryDelete(string productCode);
+    Task<IReadOnlyList<Product>> GetAllAsync(CancellationToken cancellationToken);
+    Task<Product?> GetByCodeAsync(string productCode, CancellationToken cancellationToken);
+    Task<bool> TryAddAsync(Product product, CancellationToken cancellationToken);
+    Task<bool> TryUpdateAsync(Product product, CancellationToken cancellationToken);
+    Task<bool> TryDeleteAsync(string productCode, CancellationToken cancellationToken);
 }

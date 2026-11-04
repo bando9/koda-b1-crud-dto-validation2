@@ -20,8 +20,9 @@ public sealed class ProductController : ControllerBase
 
     [HttpGet]
     [ProducesResponseType(typeof(IReadOnlyList<ProductResponse>), StatusCodes.Status200OK)]
-    public ActionResult<IReadOnlyList<Product>> GetAll()
+    public async Task<ActionResult<IReadOnlyList<Product>>> GetAll()
     {
+        // var products = await _service.Get
         return Ok(_service.GetAll());
     }
 
