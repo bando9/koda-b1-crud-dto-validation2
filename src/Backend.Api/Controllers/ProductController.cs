@@ -20,36 +20,39 @@ public sealed class ProductController : ControllerBase
 
     [HttpGet]
     [ProducesResponseType(typeof(IReadOnlyList<ProductResponse>), StatusCodes.Status200OK)]
-    public async Task<ActionResult<IReadOnlyList<Product>>> GetAll()
+    public async Task<ActionResult<IReadOnlyList<Product>>> GetAll(CancellationToken cancellationToken)
     {
-        // var products = await _service.GetAllA
-        return Ok(_service.GetAll());
+        var products = await _service.GetAllAsync(cancellationToken);
+
+        return Ok(products);
     }
 
     // GET Product by productCode
     [HttpGet("{productCode}")]
     [ProducesResponseType(typeof(ProductResponse),StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ProblemDetails),StatusCodes.Status404NotFound)]
-    public ActionResult<ProductResponse> GetByCode(
-        [FromRoute] string productCode
+    public async Task<ActionResult<ProductResponse>> GetByCode(
+        [FromRoute] string productCode,CancellationToken cancellationToken
     )
     {
-        var product = _service.GetByCode(productCode);
+        var product = await _service.GetByCodeAsync(productCode,cancellationToken);
 
         return product is null ? Problem(statusCode: StatusCodes.Status404NotFound, title: $"Sorry, product not found"):Ok(product);
     }
 
 
+    // POST Product
     [HttpPost]
     [ProducesResponseType(typeof(ProductResponse), StatusCodes.Status201Created)]
     [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status404NotFound)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public ActionResult<ProductResponse> PostProduct([FromBody] ProductRequest request)
+    public async Task<ActionResult<ProductResponse>> PostProduct([FromBody] ProductRequest request,CancellationToken cancellationToken)
     {
 
         try
         {
-            var product = _service.Create(request);
+
+            var product = await _service.CreateAsync(request,cancellationToken);
 
             if(product is null)
             {
@@ -78,13 +81,14 @@ public sealed class ProductController : ControllerBase
     [HttpDelete("{productCode}")]
     [ProducesResponseType(typeof(ProductResponse), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status404NotFound)]
-    public IActionResult Delete([FromRoute]string productCode)
+    public async Task<IActionResult> Delete([FromRoute]string productCode,CancellationToken cancellationToken)
     {
-        return _service.Delete(productCode) ? NoContent() : Problem(
+        var deleted = await _service.DeleteAsync(productCode, cancellationToken);
+
+        return deleted ? NoContent() : Problem(
             statusCode: StatusCodes.Status404NotFound,
             title: "Product not found",
-            detail: $"No product was found for code {productCode}"
-        );
+            detail: $"No product was found for code {productCode}");
     }
     
 
@@ -92,13 +96,13 @@ public sealed class ProductController : ControllerBase
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status404NotFound)]
     [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status400BadRequest)]
-    public ActionResult<ProductResponse> Update([FromRoute] string productCode, [FromBody] UpdateProductRequest request)
+    public async Task<ActionResult<ProductResponse>> Update([FromRoute] string productCode, [FromBody] UpdateProductRequest request, CancellationToken cancellationToken)
     {
         try
         {
-            var existingCode = _service.Update(productCode, request);
+            var updated = await _service.UpdateAsync(productCode, request,cancellationToken);
 
-            return existingCode is null ? Problem(statusCode: StatusCodes.Status404NotFound,title: $"product with {productCode} code not found.") : Ok(existingCode);
+            return updated is null ? Problem(statusCode: StatusCodes.Status404NotFound,title: $"product with {productCode} code not found.") : Ok(updated);
         }
         catch (ArgumentException e)
         {
