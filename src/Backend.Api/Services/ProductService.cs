@@ -43,7 +43,7 @@ public sealed class ProductService : IProductService
 
     public async Task<ProductResponse?> GetByCodeAsync(string productCode, CancellationToken cancellationToken)
     {
-        if(string.IsNullOrWhiteSpace(productCode) || productCode.Trim().Length < 30)
+        if(string.IsNullOrWhiteSpace(productCode) || productCode.Trim().Length > 30)
         {
             return null;
         }

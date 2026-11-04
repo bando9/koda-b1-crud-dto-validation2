@@ -9,7 +9,7 @@ Accept: application/json
 
 
 ### Get Product by ProductCode
-GET {{BackendApp_HostAddress}}/api/v1/products/P028
+GET {{BackendApp_HostAddress}}/api/v1/products/PR-001
 Accept: application/json
 
 ### Practice Product not Found
@@ -28,6 +28,7 @@ Content-Type: application/json
 #     "stock": 60, 
 #     "category": "Outerwear"
 # }
+
 {
 
     "productCode": "P003", 
@@ -39,13 +40,11 @@ Content-Type: application/json
 
 
 ### Delete Product
-DELETE  {{BackendApp_HostAddress}}/api/v1/products/P001
+DELETE  {{BackendApp_HostAddress}}/api/v1/products/PR-001
 Accept: application/json
 
-
-# TODO: Update
-###
-PUT {{BackendApp_HostAddress}}/api/v1/products/P002
+### Update
+PUT {{BackendApp_HostAddress}}/api/v1/products/PR-001
 Accept: application/json
 Content-Type: application/json 
 

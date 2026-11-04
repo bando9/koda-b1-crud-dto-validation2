@@ -8,6 +8,7 @@
 --     ProductCode NVARCHAR(20) NOT NULL UNIQUE,
 --     Name NVARCHAR(100) NOT NULL,
 --     Price DECIMAL(18,2) NOT NULL,
+--     Category NVARCHAR(50) NOT NULL,
 --     Stock INT NOT NULL DEFAULT 0,
 --     IsActive BIT NOT NULL DEFAULT 1,
 
@@ -16,8 +17,10 @@
 -- )
 -- GO;
 
+--     ,
 
--- INSERT INTO dbo.Product(ProductCode, Name, Price, Stock) VALUES 
--- ('PR-001', 'Minyak goreng', 21000, 10);
+
+-- INSERT INTO dbo.Product(ProductCode, Name, Price, Stock, Category) VALUES 
+-- ('PR-001', 'Minyak goreng', 21000, 10, 'Sembako');
 
 SELECT * FROM dbo.Product;
