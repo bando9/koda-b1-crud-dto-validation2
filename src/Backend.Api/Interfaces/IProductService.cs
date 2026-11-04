@@ -6,11 +6,11 @@ namespace Backend.Api.Interfaces;
 
 public interface IProductService
 {
-    IReadOnlyList<ProductResponse> GetAll();
-    ProductResponse? GetByCode(string productCode);
-    ProductResponse? Create(CreateProduct request);
-    ProductResponse? Update(string productCode, UpdateProductRequest request);
+    Task<IReadOnlyList<ProductResponse>> GetAllAsync(CancellationToken cancellationToken);
+    Task<ProductResponse?> GetByCodeAsync(string productCode, CancellationToken cancellationToken);
+    Task<ProductResponse?> CreateAsync(ProductRequest request, CancellationToken cancellationToken );
+    Task<ProductResponse?> UpdateAsync(string productCode, UpdateProductRequest request, CancellationToken cancellationToken);
 
-    bool Delete(string productCode);
-    ViewDataDictionary Create(Product product);
+    Task<bool> DeleteAsync(string productCode, CancellationToken cancellationToken);
+    // ViewDataDictionary Create(Product product);
 }

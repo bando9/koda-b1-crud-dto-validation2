@@ -44,7 +44,7 @@ public sealed class ProductController : ControllerBase
     [ProducesResponseType(typeof(ProductResponse), StatusCodes.Status201Created)]
     [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status404NotFound)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public ActionResult<ProductResponse> PostProduct([FromBody] CreateProduct request)
+    public ActionResult<ProductResponse> PostProduct([FromBody] ProductRequest request)
     {
 
         try

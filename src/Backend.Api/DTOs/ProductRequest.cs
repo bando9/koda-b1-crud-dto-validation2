@@ -1,7 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 
 
-public record CreateProduct
+public record ProductRequest
 {
     [Required]
     [StringLength(20,MinimumLength =4)]
