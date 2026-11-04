@@ -81,7 +81,7 @@ public sealed class ProductController : ControllerBase
     {
         return _service.Delete(productCode) ? NoContent() : Problem(
             statusCode: StatusCodes.Status404NotFound,
-            title: "",
+            title: "Product not found",
             detail: $"No product was found for code {productCode}"
         );
     }
