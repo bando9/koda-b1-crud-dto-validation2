@@ -22,7 +22,7 @@ public sealed class ProductController : ControllerBase
     [ProducesResponseType(typeof(IReadOnlyList<ProductResponse>), StatusCodes.Status200OK)]
     public async Task<ActionResult<IReadOnlyList<Product>>> GetAll()
     {
-        // var products = await _service.Get
+        // var products = await _service.GetAllA
         return Ok(_service.GetAll());
     }
 

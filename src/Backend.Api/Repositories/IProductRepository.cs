@@ -1,2 +1,0 @@
-namespace Backend.Api.Repositories;
-
