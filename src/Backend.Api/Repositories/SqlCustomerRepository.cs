@@ -40,7 +40,7 @@ public sealed class SqlCustomerRepository : ICustomerRepository
     public async Task<Customer?> GetByEmailAsync(string email, CancellationToken cancellationToken)
     {
         const string sql = """
-            SELECT Name, Email, Phone, Addres FROM dbo.Customer WHERE Email = @email;
+            SELECT Name, Email, Phone, Address FROM dbo.Customer WHERE Email = @email;
         """;
 
         await using var connection = new SqlConnection(_connectionString);
@@ -142,27 +142,27 @@ public sealed class SqlCustomerRepository : ICustomerRepository
     {
         AddCustomerEmail(command, customer.Email);
 
-        command.Parameters.Add("@name", SqlDbType.NVarChar,200).Value = customer.Name;
+        command.Parameters.Add("@name", SqlDbType.NVarChar,100).Value = customer.Name;
 
-        command.Parameters.Add("@phone", SqlDbType.NVarChar,150).Value = customer.Phone;
+        command.Parameters.Add("@phone", SqlDbType.NVarChar,15).Value = customer.Phone;
 
-        command.Parameters.Add("@address", SqlDbType.NVarChar,500).Value = customer.Address;
+        command.Parameters.Add("@address", SqlDbType.NVarChar,255).Value = customer.Address;
 
 
     }
 
     private static void AddCustomerEmail(SqlCommand command, string email)
     {
-        command.Parameters.Add("@email", SqlDbType.NVarChar,200).Value = email.Trim().ToUpperInvariant();
+        command.Parameters.Add("@email", SqlDbType.NVarChar,50).Value = email.Trim();
     }
 
     public static Customer ReadCustomer(SqlDataReader reader)
     {
         return new Customer(
-                reader.GetString(0), 
-                reader.GetString(1),
-                reader.GetString(2),
-                reader.GetString(3)
+                reader.GetString(reader.GetOrdinal("Name")),
+        reader.GetString(reader.GetOrdinal("Email")),
+        reader.GetString(reader.GetOrdinal("Phone")),
+        reader.GetString(reader.GetOrdinal("Address"))
             );
         }
 }

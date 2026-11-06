@@ -17,9 +17,11 @@ builder.Services.AddProblemDetails();
 
 // * Repository
 builder.Services.AddScoped<IProductRepository, SqlProductRepository>();
+builder.Services.AddScoped<ICustomerRepository, SqlCustomerRepository>();
 
 // * Service
 builder.Services.AddScoped<IProductService, ProductService>();
+builder.Services.AddScoped<ICustomerService, CustomerService>();
 
 var app = builder.Build();
 

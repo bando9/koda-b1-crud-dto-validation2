@@ -13,5 +13,5 @@ public record CustomerRequest(
     string Phone,
 
     [Required, StringLength(255)]
-    string Address
+    string Address 
 );
