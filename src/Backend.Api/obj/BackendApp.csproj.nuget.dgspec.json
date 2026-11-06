@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "E:\\code\\koda-projects\\day16-backend\\koda-b1-backend\\src\\Backend.Api\\BackendApp.csproj": {}
+    "E:\\code\\koda-projects\\day16-backend\\koda-b1-crud-dto-validation2\\src\\Backend.Api\\BackendApp.csproj": {}
   },
   "projects": {
-    "E:\\code\\koda-projects\\day16-backend\\koda-b1-backend\\src\\Backend.Api\\BackendApp.csproj": {
+    "E:\\code\\koda-projects\\day16-backend\\koda-b1-crud-dto-validation2\\src\\Backend.Api\\BackendApp.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\code\\koda-projects\\day16-backend\\koda-b1-backend\\src\\Backend.Api\\BackendApp.csproj",
+        "projectUniqueName": "E:\\code\\koda-projects\\day16-backend\\koda-b1-crud-dto-validation2\\src\\Backend.Api\\BackendApp.csproj",
         "projectName": "BackendApp",
-        "projectPath": "E:\\code\\koda-projects\\day16-backend\\koda-b1-backend\\src\\Backend.Api\\BackendApp.csproj",
+        "projectPath": "E:\\code\\koda-projects\\day16-backend\\koda-b1-crud-dto-validation2\\src\\Backend.Api\\BackendApp.csproj",
         "packagesPath": "C:\\Users\\DELL\\.nuget\\packages\\",
-        "outputPath": "E:\\code\\koda-projects\\day16-backend\\koda-b1-backend\\src\\Backend.Api\\obj\\",
+        "outputPath": "E:\\code\\koda-projects\\day16-backend\\koda-b1-crud-dto-validation2\\src\\Backend.Api\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\DELL\\AppData\\Roaming\\NuGet\\NuGet.Config",

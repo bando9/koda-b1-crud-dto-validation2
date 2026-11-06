@@ -56,6 +56,60 @@ Content-Type: application/json
 }
 
 
+# * ======= Customer
+### Get All Customer
+GET {{BackendApp_HostAddress}}/api/v1/customers
+Accept: application/json
+
+
+### Get Product by ProductCode
+GET {{BackendApp_HostAddress}}/api/v1/products/PR-001
+Accept: application/json
+
+### Practice Product not Found
+GET {{BackendApp_HostAddress}}/api/v1/products/P0100
+Accept: application/json
+
+### Create Product
+POST {{BackendApp_HostAddress}}/api/v1/products
+Accept: application/json
+Content-Type: application/json 
+
+# {
+#     "productCode": "P002", 
+#     "name": "Jaket Hoodie Polos",
+#     "price": 250000, 
+#     "stock": 60, 
+#     "category": "Outerwear"
+# }
+
+{
+
+    "productCode": "P003", 
+    "name": "Kemeja Flanel Kotak",
+    "price": 220000, 
+    "stock": 75, 
+    "category": "Atasan"
+}
+
+
+### Delete Product
+DELETE  {{BackendApp_HostAddress}}/api/v1/products/PR-001
+Accept: application/json
+
+### Update
+PUT {{BackendApp_HostAddress}}/api/v1/products/PR-001
+Accept: application/json
+Content-Type: application/json 
+
+{
+    "name": "Kaos Polos Cotton Combed",
+    "price": 75000, 
+    "stock": 150, 
+    "category": "Atasan"
+}
+
+
 
 #         new Product("P001", "Kaos Polos Cotton Combed", 75000m, 150, "Atasan"),
 #         new Product("P002", "Baju Distro Grafis", 150000m, 100, "Atasan"),
