@@ -1,5 +1,4 @@
 using System.Data;
-using Backend.Api.Interfaces;
 using Backend.Api.Models;
 using Microsoft.Data.SqlClient;
 

@@ -1,8 +1,8 @@
 using Backend.Api.Models;
 
-namespace Backend.Api.Interfaces;
+namespace Backend.Api.Repositories;
 
-public interface IProductRepository
+public interface ICustomerRepository
 {
     Task<IReadOnlyList<Product>> GetAllAsync(CancellationToken cancellationToken);
     Task<Product?> GetByCodeAsync(string productCode, CancellationToken cancellationToken);
