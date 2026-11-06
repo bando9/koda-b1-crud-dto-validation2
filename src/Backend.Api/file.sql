@@ -47,3 +47,9 @@ INSERT INTO dbo.Product(ProductCode, Name, Price, Stock, Category, CustomerId) V
 
 select *
 from dbo.Product p join dbo.Customer c on p.CustomerId = c.CustomerId;
+
+SELECT p.ProductCode, p.Name, p.Price, p.Category, p.Stock, p.IsActive, c.Email,c.Name
+            FROM dbo.Product AS p
+            INNER JOIN dbo.Customer AS c ON c.CustomerId = p.CustomerId
+            WHERE c.Email = 'test@gmail.com'
+            ORDER BY p.Name;

@@ -98,3 +98,9 @@ Content-Type: application/json
     "phone": "92109310", 
     "address": "Oslo"
 }
+
+# * ======= Customer Product =======
+
+### Get Product by Customer
+GET {{BackendApp_HostAddress}}/api/v1/customers/test@gmail.com/products
+

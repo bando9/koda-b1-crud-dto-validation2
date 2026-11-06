@@ -11,4 +11,7 @@ public interface ICustomerService
     Task<CustomerResponse?> UpdateAsync(string email, UpdateCustomerRequest request, CancellationToken cancellationToken);
 
     Task<bool> DeleteAsync(string email, CancellationToken cancellationToken);
+
+    Task<IReadOnlyList<CustomerProductResponse>?> GetProductsAsync(string email, CancellationToken cancellationToken);
+    
 }

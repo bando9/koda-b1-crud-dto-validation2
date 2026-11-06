@@ -60,4 +60,18 @@ public sealed class CustomerService : ICustomerService
 
         return updated ? CustomerResponse.FromModel(customer) : null;
     }
+
+    public async Task<IReadOnlyList<CustomerProductResponse>?> GetProductsAsync(string email, CancellationToken cancellationToken)
+    {
+        if (string.IsNullOrWhiteSpace(email) || email.Trim().Length > 50)
+            return null;
+
+        // null = customer tidak ada (404), list kosong = customer ada tapi belum punya product (200)
+        var customer = await _repository.GetByEmailAsync(email, cancellationToken);
+        if (customer is null) return null;
+
+        var products = await _repository.GetProductsByEmailAsync(email, cancellationToken);
+        return products.Select(CustomerProductResponse.FromModel).ToArray();
+    }
+
 }

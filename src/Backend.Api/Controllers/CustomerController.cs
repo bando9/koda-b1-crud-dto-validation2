@@ -116,8 +116,19 @@ public sealed class CustomerController : ControllerBase
         }
     }
 
+    // GET api/v1/customers/{email}/products
+    [HttpGet("{email}/products")]
+    [ProducesResponseType(typeof(IReadOnlyList<CustomerProductResponse>), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status404NotFound)]
+    public async Task<ActionResult<IReadOnlyList<CustomerProductResponse>>> GetProducts(
+        [FromRoute] string email, CancellationToken cancellationToken)
+    {
+        var products = await _service.GetProductsAsync(email, cancellationToken);
 
-
+        return products is null
+            ? Problem(statusCode: StatusCodes.Status404NotFound, title: "Customer not found")
+            : Ok(products);
+    }
     
 
 }

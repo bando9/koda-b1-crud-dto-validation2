@@ -135,6 +135,38 @@ public sealed class SqlCustomerRepository : ICustomerRepository
         return affectedRows == 1;
     }
 
+    public async Task<IReadOnlyList<CustomerProduct>> GetProductsByEmailAsync(string email, CancellationToken cancellationToken)
+    {
+        const string sql = """
+            SELECT p.ProductCode, p.Name, p.Price, p.Category, p.Stock, p.IsActive
+            FROM dbo.Product AS p
+            INNER JOIN dbo.Customer AS c ON c.CustomerId = p.CustomerId
+            WHERE c.Email = @email
+            ORDER BY p.Name;
+        """;
+
+        List<CustomerProduct> products = new();
+        await using var connection = new SqlConnection(_connectionString);
+        await connection.OpenAsync(cancellationToken);
+
+        await using var command = new SqlCommand(sql, connection);
+        AddCustomerEmail(command, email);
+
+        await using var reader = await command.ExecuteReaderAsync(cancellationToken);
+        while (await reader.ReadAsync(cancellationToken))
+        {
+            products.Add(new CustomerProduct(
+                reader.GetString(reader.GetOrdinal("ProductCode")),
+                reader.GetString(reader.GetOrdinal("Name")),
+                reader.GetDecimal(reader.GetOrdinal("Price")),
+                reader.GetString(reader.GetOrdinal("Category")),
+                reader.GetInt32(reader.GetOrdinal("Stock")),
+                reader.GetBoolean(reader.GetOrdinal("IsActive"))));
+        }
+
+        return products;
+    }
+
 
     // * ========== METHOD ==========
 
